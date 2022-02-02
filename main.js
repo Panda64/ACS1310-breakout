@@ -18,6 +18,9 @@ const brickHeight = 20;
 const brickPadding = 10;
 const brickOffsetTop = 30;
 const brickOffsetLeft = 30;
+const paddleXStart = (canvas.width - paddleWidth) / 2;
+const PI2 = Math.PI * 2;
+const objectColor = '#0095DD';
 
 // -----------------------------------------------------------------------------
 // Variables
@@ -27,7 +30,7 @@ let x = canvas.width / 2;
 let y = canvas.height - 30;
 let dx = 2;
 let dy = -2;
-let paddleX = (canvas.width - paddleWidth) / 2;
+let paddleX = paddleXStart;
 let rightPressed = false;
 let leftPressed = false;
 let score = 0;
@@ -71,15 +74,15 @@ function collisionDetection() {
 
 function drawBall() {
   ctx.beginPath();
-  ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-  ctx.fillStyle = '#0095DD';
+  ctx.arc(x, y, ballRadius, 0, PI2);
+  ctx.fillStyle = objectColor;
   ctx.fill();
   ctx.closePath();
 }
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-  ctx.fillStyle = '#0095DD';
+  ctx.fillStyle = objectColor;
   ctx.fill();
   ctx.closePath();
 }
@@ -93,7 +96,7 @@ function drawBricks() {
         bricks[c][r].y = brickY;
         ctx.beginPath();
         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        ctx.fillStyle = '#0095DD';
+        ctx.fillStyle = objectColor;
         ctx.fill();
         ctx.closePath();
       }
@@ -102,12 +105,12 @@ function drawBricks() {
 }
 function drawScore() {
   ctx.font = '16px Arial';
-  ctx.fillStyle = '#0095DD';
+  ctx.fillStyle = objectColor;
   ctx.fillText(`Score: ${score}`, 8, 20);
 }
 function drawLives() {
   ctx.font = '16px Arial';
-  ctx.fillStyle = '#0095DD';
+  ctx.fillStyle = objectColor;
   ctx.fillText(`Lives: ${lives}`, canvas.width - 65, 20);
 }
 
@@ -142,7 +145,7 @@ function draw() {
         y = canvas.height - 30;
         dx = 3;
         dy = -3;
-        paddleX = (canvas.width - paddleWidth) / 2;
+        paddleX = paddleXStart;
       }
     }
   }
