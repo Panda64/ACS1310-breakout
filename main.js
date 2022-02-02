@@ -125,6 +125,11 @@ function resetBallAndPaddle() {
   paddleX = paddleXStart;
 }
 
+function moveBall() {
+  x += dx;
+  y += dy;
+}
+
 // -----------------------------------------------------------------------------
 // Game Loop
 // -----------------------------------------------------------------------------
@@ -137,6 +142,7 @@ function draw() {
   drawScore();
   drawLives();
   collisionDetection();
+  moveBall();
 
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
     dx = -dx;
@@ -163,8 +169,6 @@ function draw() {
     paddleX -= 7;
   }
 
-  x += dx;
-  y += dy;
   requestAnimationFrame(draw);
 }
 
