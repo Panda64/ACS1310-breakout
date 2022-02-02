@@ -26,11 +26,14 @@ const objectColor = '#0095DD';
 // Variables
 // -----------------------------------------------------------------------------
 
-let x = canvas.width / 2;
-let y = canvas.height - 30;
-let dx = 2;
-let dy = -2;
-let paddleX = paddleXStart;
+let x;
+let y;
+let dx;
+let dy;
+let paddleX;
+
+resetBallAndPaddle();
+
 let rightPressed = false;
 let leftPressed = false;
 let score = 0;
@@ -114,6 +117,14 @@ function drawLives() {
   ctx.fillText(`Lives: ${lives}`, canvas.width - 65, 20);
 }
 
+function resetBallAndPaddle() {
+  x = canvas.width / 2;
+  y = canvas.height - 30;
+  dx = 3;
+  dy = -3;
+  paddleX = paddleXStart;
+}
+
 // -----------------------------------------------------------------------------
 // Game Loop
 // -----------------------------------------------------------------------------
@@ -141,11 +152,7 @@ function draw() {
         alert('GAME OVER');
         document.location.reload();
       } else {
-        x = canvas.width / 2;
-        y = canvas.height - 30;
-        dx = 3;
-        dy = -3;
-        paddleX = paddleXStart;
+        resetBallAndPaddle();
       }
     }
   }
