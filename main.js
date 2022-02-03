@@ -5,6 +5,10 @@
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 
+// *****************************************************************************
+// Variables
+// *****************************************************************************
+
 // -----------------------------------------------------------------------------
 // Constants
 // -----------------------------------------------------------------------------
@@ -21,14 +25,11 @@ const brickOffsetLeft = 30;
 const paddleXStart = (canvas.width - paddleWidth) / 2;
 const PI2 = Math.PI * 2;
 const objectColor = '#0095DD';
+
 const gameWonMessage = 'You Won!';
 const gameOverMessage = 'Game Over.';
 
-// -----------------------------------------------------------------------------
-// Variables
-// -----------------------------------------------------------------------------
-
-const ball = {
+let ball = {
   x: 0,
   y: 0,
   dx: 0,
