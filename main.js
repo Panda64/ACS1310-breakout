@@ -114,9 +114,9 @@ class Paddle {
     this.color = color;
   }
 
-  moveBy(x, y) {
-    this.x += x;
-    this.y += y;
+  moveBy(dx, dy) {
+    this.x += dx;
+    this.y += dy;
   }
 
   moveTo(x, y) {
@@ -133,6 +133,26 @@ class Paddle {
   }
 }
 
+class GameLabel {
+  constructor(text, x, y, color, font = '16px Arial') {
+    this.text = text;
+    this.x = x;
+    this.y = y;
+    this.color = color;
+    this.value = 0;
+    this.font = font;
+  }
+
+  render(ctx) {
+    ctx.font = this.font;
+    ctx.fillStyle = this.color;
+    ctx.fillText(`${this.text}: ${this.value}`, this.x, this.y);
+  }
+}
+
+const scoreLabel = new GameLabel('Score', 8, 20, objectColor);
+const livesLabel = new GameLabel('Lives', canvas.width - 65, 20, objectColor);
+livesLabel.value = 3;
 const paddle = new Paddle(paddleXStart, paddleYStart, paddleWidth, paddleHeight, objectColor);
 const bricks = new Bricks(brickColumnCount, brickRowCount);
 let ball = new Ball(0, 0, 2, -2, ballRadius, objectColor);
@@ -141,8 +161,6 @@ resetBallAndPaddle();
 
 let rightPressed = false;
 let leftPressed = false;
-let score = 0;
-let lives = 3;
 
 // *****************************************************************************
 // Functions
@@ -158,8 +176,8 @@ function collisionDetection() {
             && ball.y > brick.y && ball.y < brick.y + brickHeight) {
           ball.dy = -ball.dy;
           brick.status = 0;
-          score += 1;
-          if (score === brickRowCount * brickColumnCount) {
+          scoreLabel.value += 1;
+          if (scoreLabel.value === bricks.cols * bricks.rows) {
             alert(gameWonMessage);
             document.location.reload();
           }
@@ -167,17 +185,6 @@ function collisionDetection() {
       }
     }
   }
-}
-
-function drawScore() {
-  ctx.font = '16px Arial';
-  ctx.fillStyle = objectColor;
-  ctx.fillText(`Score: ${score}`, 8, 20);
-}
-function drawLives() {
-  ctx.font = '16px Arial';
-  ctx.fillStyle = objectColor;
-  ctx.fillText(`Lives: ${lives}`, canvas.width - 65, 20);
 }
 
 function resetBallAndPaddle() {
@@ -207,8 +214,8 @@ function collisionsWithCanvasAndPaddle() {
     if (ball.x > paddle.x && ball.x < paddle.x + paddleWidth) {
       ball.dy = -ball.dy;
     } else {
-      lives -= 1;
-      if (!lives) {
+      livesLabel.value -= 1;
+      if (livesLabel.value < 1) {
         alert(gameOverMessage);
         document.location.reload();
       } else {
@@ -227,8 +234,8 @@ function draw() {
   bricks.render(ctx);
   ball.render(ctx);
   paddle.render(ctx);
-  drawScore();
-  drawLives();
+  scoreLabel.render(ctx);
+  livesLabel.render(ctx);
   collisionDetection();
   ball.move();
   movePaddle();
