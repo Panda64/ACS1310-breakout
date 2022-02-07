@@ -28,7 +28,7 @@ class Game {
 
     this.scoreLabel = new GameLabel('Score', 8, 20, this.objectColor);
     this.livesLabel = new GameLabel('Lives', this.canvas.width - 65, 20, this.objectColor);
-    this.paddle = new Paddle(this.paddleXStart, this.paddleYStart, this.paddleWidth, this.paddleHeight, this.objectColor);
+    this.paddle = new Sprite(this.paddleXStart, this.paddleYStart, this.paddleWidth, this.paddleHeight, this.objectColor);
 
     this.bricks = new Bricks({
       cols: this.brickColumnCount,

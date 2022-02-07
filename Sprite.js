@@ -1,5 +1,11 @@
-class Paddle {
-  constructor(x, y, width, height, color = 'red') {
+// ----------------------------------------------------------------------------
+
+// Sprite
+
+// ----------------------------------------------------------------------------
+
+class Sprite {
+  constructor(x = 0, y = 0, width = 10, height = 10, color = 'red') {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -19,7 +25,7 @@ class Paddle {
 
   render(ctx) {
     ctx.beginPath();
-    ctx.rect(this.x, this.y, this.width, this.height);
+    ctx.arc(this.x, this.y, this.radius, 0, this.PI2);
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.closePath();

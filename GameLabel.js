@@ -7,7 +7,7 @@ class GameLabel {
     this.value = 0;
     this.font = font;
   }
-  
+
   render(ctx) {
     ctx.font = this.font;
     ctx.fillStyle = this.color;
