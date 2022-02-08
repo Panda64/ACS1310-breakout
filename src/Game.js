@@ -4,10 +4,15 @@
 
 // -------------------------------------------------------------------------------------------------
 
+import Ball from './Ball';
+import Sprite from './Sprite';
+import Bricks from './Bricks';
+import GameLabel from './GameLabel';
+
 class Game {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
-    this.ctx = canvas.getContext('2d');
+    this.ctx = this.canvas.getContext('2d');
 
     this.ballRadius = 10;
     this.paddleHeight = 10;
@@ -36,8 +41,8 @@ class Game {
       width: this.brickWidth,
       height: this.brickHeight,
       padding: this.brickPadding,
-      offsetTop: this.brickOffsetTop,
       offsetLeft: this.brickOffsetLeft,
+      offsetTop: this.brickOffsetTop,
       color: this.objectColor,
     });
 
@@ -53,7 +58,7 @@ class Game {
 
   setup() {
     this.livesLabel.value = 3;
-    resetBallAndPaddle();
+    this.resetBallAndPaddle();
 
     document.addEventListener('keydown', (e) => {
       this.keyDownHandler(e);
@@ -82,7 +87,7 @@ class Game {
             brick.status = 0;
             this.scoreLabel.value += 1;
             if (this.scoreLabel.value === this.bricks.cols * this.bricks.rows) {
-              alert(gameWonMessage);
+              alert(this.gameWonMessage);
               document.location.reload();
             }
           }
@@ -112,10 +117,10 @@ class Game {
       } else {
         this.livesLabel.value -= 1;
         if (this.livesLabel.value < 1) {
-          alert(gameOverMessage);
+          alert(this.gameOverMessage);
           document.location.reload();
         } else {
-          resetBallAndPaddle();
+          this.resetBallAndPaddle();
         }
       }
     }
@@ -162,3 +167,5 @@ class Game {
     });
   }
 }
+
+export default Game;
