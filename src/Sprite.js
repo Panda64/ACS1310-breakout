@@ -25,7 +25,7 @@ class Sprite {
 
   render(ctx) {
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, this.PI2);
+    ctx.rect(this.x, this.y, this.width, this.height);
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.closePath();

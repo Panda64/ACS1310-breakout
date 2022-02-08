@@ -7,7 +7,7 @@ class Bricks {
     this.cols = cols;
     this.rows = rows;
     this.bricks = [];
-    this.bricks = width;
+    this.width = width;
     this.height = height;
     this.padding = padding;
     this.offsetLeft = offsetLeft;
